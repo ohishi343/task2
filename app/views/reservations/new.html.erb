@@ -1,5 +1,6 @@
 <h1>予約内容確認</h1>
 
+<%= render "shared/error", obj: @reservation %>
 
 <h3>￥<%= @reservation.room.price %>/ 日</h3>
 <%= form_with model: @reservation, local: true do |f| %>
@@ -26,8 +27,9 @@
     </tr>
   </table>
   
-	  <%= f.hidden_field :room_id %>
-	  <%= f.hidden_field :user_id %>
-	  <%= f.submit '予約する' %>
-	<% end %>
-  
+  <%= f.hidden_field :room_id %>
+  <%= f.hidden_field :user_id %>
+  <%= f.submit '予約する' %>
+<% end %>
+
+<%= link_to  "戻る", room_path(@reservation.room.id) %>

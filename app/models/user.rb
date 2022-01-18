@@ -7,4 +7,9 @@ class User < ApplicationRecord
   has_many :reservations
   
   has_one_attached :image
+  
+  validates :email, uniqueness: true, presence: true
+  validates :encrypted_password, presence: true
+  validates :name, length: { maximum: 30 }
+  validates :introduction, length: { maximum: 300 }
 end

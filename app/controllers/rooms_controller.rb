@@ -1,6 +1,5 @@
 class RoomsController < ApplicationController
   before_action :move_to_root, except: [:index, :show]
-  before_action :set_q, only: [:index, :search]
   
   def index
   end
@@ -10,12 +9,12 @@ class RoomsController < ApplicationController
   end
   
   def create
-    @room = Room.new(params.require(:room).permit(:name, :content, :price, :address, :image).merge(user_id: current_user.id))
+    @room = Room.new(room_params.merge(user_id: current_user.id))
     if @room.save
       flash[:notice] = "ルームを新規登録しました"
       redirect_to rooms_posts_path
     else
-      render new_room_path, status: :unprocessable_entity
+      render "new", status: :unprocessable_entity
     end
   end
   
@@ -34,8 +33,8 @@ class RoomsController < ApplicationController
   
   private
   
-  def set_q
-    @q = Room.ransack(params[:q])
+  def room_params
+    params.require(:room).permit(:name, :content, :price, :address, :image)
   end
   
   def move_to_root

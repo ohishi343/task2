@@ -11,8 +11,42 @@
   </head>
 
   <body>
+    <header>
+      <%= link_to image_tag("logo.png"), root_path %>
+      <div class="nav-item">
+      <% if user_signed_in? %>
+        <%= current_user.name %>
+        <%= current_user.email %>
+        <%= link_to "プロフィール", user_path(current_user.id) %>
+        <%= link_to "ルーム登録", new_room_path %>
+        <%= link_to "登録済みルーム一覧", rooms_posts_path %>
+        <%= link_to "予約済みルーム一覧", reservations_path %>
+        <%= link_to "ログアウト", logout_path %>
+        <%= search_form_for @q, url: search_rooms_path do |f| %>
+          <%= f.label :address_cont, "　エリア　" %>
+          <%= f.search_field :address_cont %><
+          <%= f.submit "検索" %>
+        <% end %>
+        <%= search_form_for @q, url: search_rooms_path do |f| %>
+          <%= f.label :name_or_content_cont, "キーワード" %>
+          <%= f.search_field :name_or_content_cont %><
+          <%= f.submit "検索" %>
+        <% end %>
+  
+      <% else %>
+        <%= link_to "ログイン", login_path %>
+        <%= link_to "登録する", signup_path %>
+      <% end %>
+      </div>
+    </header>
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    
     <%= yield %>
+    
+    <footer class="footer">
+      <p>宿泊予約サービスアプリ</p>
+    </footer>
   </body>
 </html>

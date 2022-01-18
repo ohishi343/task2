@@ -17,13 +17,13 @@ class ReservationsController < ApplicationController
       flash[:notice] = "予約しました"
       redirect_to root_path
     else
-      render rooms_path(@room.id), status: :unprocessable_entity
+      render "new", status: :unprocessable_entity
     end
   end
 
-private
+  private
+
   def reservation_params
     params.require(:reservation).permit(:start_date, :end_date, :num_of_people, :room_id, :user_id)
   end
-
 end
