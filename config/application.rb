@@ -18,5 +18,7 @@ module Task2
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.time_zone = 'Tokyo'
+    config.web_console.whitelisted_ips = "153.246.143.170"
   end
 end

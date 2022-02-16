@@ -1,0 +1,27 @@
+<h2>Profile</h2>
+
+<table>
+  <tr>
+    <th>プロフィール画像</th>
+    <td><% if @user.image.present? %><%= image_tag @user.image, size: "100x100" %><% end %></td>
+  </tr>
+  <tr>
+    <th>名前</th>
+    <td><% if @user.name.present? %><%= @user.name %><% end %></td>
+  </tr>
+  <tr>
+    <th>メールアドレス</th>
+    <td><%= @user.email %></td>
+  </tr>
+  <tr>
+    <th>自己紹介</th>
+    <td><%= @user.introduction %></td>
+  </tr>
+</table>
+
+<div>
+  <ul>
+    <li><%= link_to "プロフィール変更", edit_user_registration_path %></li>
+    <li><%= link_to "戻る", root_path %></li>
+  </ul>
+</div>

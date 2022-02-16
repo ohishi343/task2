@@ -1,0 +1,32 @@
+<h1>登録済みルーム一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ルーム画像</th>
+      <th>ルーム名</th>
+      <th>住所</th>
+      <th>ルーム紹介</th>
+      <th>料金</th>
+      <th>作成日</th>
+      <th>参照</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @rooms.each do |room| %>
+      <% if room.user_id == current_user.id %>
+        <tr>
+          <td><%= image_tag room.image, size: "100x100" %></td>
+          <td><%= room.name %></td>
+          <td><%= room.address %></td>
+          <td><%= room.content %></td>
+          <td><%= room.price %></td>
+          <td><%= room.created_at.to_s(:datetime_jp) %></td>
+          <td><%= link_to "参照", room %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+  
+<%= link_to "トップに戻る", root_path %>
